@@ -1,4 +1,4 @@
-import { createContext, useState, type ReactNode } from "react";
+import { createContext, useEffect, useState, type ReactNode } from "react";
 import type { MemberI, TeamI } from "~/models/team.interface";
 
 interface TeamsContextI {
@@ -9,11 +9,11 @@ interface TeamsContextI {
     fetchMembers: () => Promise<void>,
     assignMemberToTeam: (teamId: number, newMemberId: number) => void,
     removeMemberFromTeam: (teamId: number, memberId: number) => void,
-    // setSortBy: (key: keyOfTeam) =>void,
-    // setCurrentPage: (page: number) => void,
+    setSortBy: (key: keyof TeamI) =>void,
+    setCurrentPage: (page: number) => void,
     pageSize: number,
     totalPages: number,
-    currentPages: number
+    currentPage: number
 }
 
 export const TeamsContext = createContext<TeamsContextI>(null!);
@@ -23,9 +23,10 @@ export const TeamsProvider = ({children}: {children: ReactNode}) => {
     const [allTeams, setAllTeams] = useState<TeamI[]>([]);
     const [paginatedTeams, setPaginatedTeams] = useState<TeamI[]>([]);
     const [allMembers, setAllMembers] = useState<MemberI[]>([]);
-    const [pageSize, setPageSize] = useState(0);
+    const [pageSize, setPageSize] = useState(8);
     const [totalPages,setTotalPages] = useState(0);
-    const [currentPages, setCurrentPages] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [sortBy, setSortBy] = useState<keyof TeamI>('title');
 
     const apiRoot = "https://jsonplaceholder.typicode.com";
 
@@ -63,7 +64,21 @@ export const TeamsProvider = ({children}: {children: ReactNode}) => {
         localStorage.setItem(`${teamId}`, JSON.stringify(newMemberList));
     }
 
-    
+    useEffect(() => {
+        const sortedTeams = [...allTeams].sort((a, b) => {
+            if (sortBy === 'title') {
+                return a.title.localeCompare(b.title);
+            } else if (sortBy === 'assignedMemberIds') {
+                return b.assignedMemberIds.length - a.assignedMemberIds.length;
+            }
+            return 0;
+        });
+
+        setTotalPages(Math.ceil(sortedTeams.length / pageSize));
+        const startIndex = (currentPage - 1) * pageSize;
+        setPaginatedTeams(sortedTeams.slice(startIndex, startIndex + pageSize));
+    }, [allTeams, currentPage, sortBy]);
+
     return (
         <TeamsContext.Provider value={{
             allTeams,
@@ -73,11 +88,11 @@ export const TeamsProvider = ({children}: {children: ReactNode}) => {
             fetchMembers,
             assignMemberToTeam,
             removeMemberFromTeam,
-            // setSortBy,
-            // setCurrentPage,
+            setSortBy,
+            setCurrentPage,
             pageSize,
             totalPages,
-            currentPages
+            currentPage
         }}>
             {children}
         </TeamsContext.Provider>

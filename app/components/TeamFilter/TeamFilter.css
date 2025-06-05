@@ -1,0 +1,14 @@
+.controls {
+    display: flex;
+    justify-content: space-between;
+}
+
+select {
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  font-size: 0.9rem;
+  transition: border-color 0.2s ease-in-out;
+  cursor: pointer;
+}
