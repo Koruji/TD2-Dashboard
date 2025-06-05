@@ -11,8 +11,6 @@ export function meta({}: Route.MetaArgs) {
 
 export default function TeamsDashboardRoute() {
     return (
-        <TeamsProvider>
-            <TeamsDashboard></TeamsDashboard>
-        </TeamsProvider>
+        <TeamsDashboard></TeamsDashboard>  
     );
 }

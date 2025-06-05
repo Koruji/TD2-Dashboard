@@ -9,6 +9,9 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
+import Header from "./layout/Header/Header";
+import Footer from "./layout/Footer/Footer";
+import { TeamsProvider } from "./contexts/teams/TeamsContext";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -33,7 +36,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
+        <Header></Header>
+        <TeamsProvider>
+          {children}
+        </TeamsProvider>
+        <Footer></Footer>
         <ScrollRestoration />
         <Scripts />
       </body>

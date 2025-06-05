@@ -1,0 +1,26 @@
+.modal-container {
+  position: absolute;
+
+  margin: 1rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  padding: 1rem;
+  z-index: 100;
+  display: none;
+  max-width: 400px;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-container.visible {
+  display: block;
+}
+
+.modal-close {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  font-size: 1.2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
