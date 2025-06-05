@@ -29,9 +29,7 @@ export default function TeamsDashboard() {
                     <button onClick={() => {setShowModal(true); setSelectedTeam(item.id);}}>Gérer les membres</button>
                 </article>
             ))}
-            <ModalMember showModal={showModal} selectedTeam={selectedTeam} onClose={() => setShowModal(false)}>
-                <h1>Liste des clients</h1>
-            </ModalMember>
+            <ModalMember showModal={showModal} selectedTeam={selectedTeam} onClose={() => { setShowModal(false); fetchTeams(); } }/>
     </div>
     );
 }

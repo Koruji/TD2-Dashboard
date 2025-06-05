@@ -1,26 +1,68 @@
 .modal-container {
-  position: absolute;
+    position: absolute;
+    margin: 1rem;
+    background: #FEFCFE;
+    border-radius: 1rem;
+    padding: 1rem;
+    display: none;
+    min-width: 82%;
+}
 
-  margin: 1rem;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 8px;
-  padding: 1rem;
-  z-index: 100;
-  display: none;
-  max-width: 400px;
-  animation: fadeIn 0.3s ease;
+.modal-overlay {
+    position: fixed;
+    top: 0; 
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(4px);
 }
 
 .modal-container.visible {
-  display: block;
+    display: block;
 }
 
 .modal-close {
-  position: absolute;
-  top: 4px;
-  right: 6px;
-  font-size: 1.2rem;
-  background: none;
-  border: none;
-  cursor: pointer;
+    position: absolute;
+    top: 4px;
+    right: 6px;
+    font-size: 1.2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+table th,
+table td {
+    padding: 12px 16px;
+    text-align: center;
+}
+
+table thead {
+    font-weight: bold;
+    background-color: #F2E2FC;
+}
+
+button {
+    margin-right: 8px;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.assigned {
+    background-color: #E6F7ED;
+}
+
+.non-assigned {
+    background-color: #FEEBE7;
 }

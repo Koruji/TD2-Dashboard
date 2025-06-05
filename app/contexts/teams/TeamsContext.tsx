@@ -40,7 +40,6 @@ export const TeamsProvider = ({children}: {children: ReactNode}) => {
             setAllTeams(data || []);
         })
         .catch(err => { console.error(`Erreur : ${err}`)});
-        
     }
 
     const fetchMembers = async() => {
@@ -59,9 +58,9 @@ export const TeamsProvider = ({children}: {children: ReactNode}) => {
     }
 
     const removeMemberFromTeam = (teamId: number, memberId: number) => {
-        const existingMember: MemberI[] = JSON.parse(localStorage.getItem(`${teamId}`) || '[]');
-        const newMemberList = existingMember.filter(member => member.id !== memberId)
-        localStorage.setItem(`${teamId}`, JSON.stringify(existingMember));
+        const existingMemberIds: number[] = JSON.parse(localStorage.getItem(`${teamId}`) || '[]');
+        const newMemberList = existingMemberIds.filter(id => id !== memberId);
+        localStorage.setItem(`${teamId}`, JSON.stringify(newMemberList));
     }
 
     
