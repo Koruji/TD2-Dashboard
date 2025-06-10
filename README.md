@@ -11,4 +11,4 @@ https://jsonplaceholder.typicode.com/posts
 
 _________________________________________________________
 ### Devoir noté - semaine ReactJS et communication vers une API<br>
-**Note** : ?/20
+**Note** : 10/10
